@@ -10,13 +10,16 @@ class BackupDaemon
      disk = %w[bk01-weekly bk01-daily1 bk01-daily2 bk01-daily1 bk01-daily2 bk01-daily1 bk01-daily2]
      @source_path= disk[@today.wday]
      if @today.mon.even?
-       @destination_path = "Adisk"
-     else
        @destination_path = "Bdisk"
+     else
+       @destination_path = "Adisk"
      end
   end
   def daily_backup
-     puts "rsync -ra /mnt/#{@source_path}  --delete /mnt/#{@destination_path}/#{@day}"
+     `echo "start #{@today}" >> /mnt/#{@destination_path}/log`
+     `rsync -rav --log-file=/mnt/#{@destination_path}/rsync-log.txt /mnt/#{@source_path}/it-backup/e/Accounting/ --delete /mnt/#{@destination_path}/#{@day}`
+     check_size = `du -sh /mnt/#{@destination_path}/#{@day}`
+     `echo "stop #{@today}  Total size= #{check_size}" >> /mnt/#{@destination_path}/log`
   end
   def monthly_backup
      if @day == 1 
