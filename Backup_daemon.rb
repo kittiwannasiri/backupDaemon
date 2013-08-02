@@ -16,14 +16,19 @@ class BackupDaemon
      end
   end
   def daily_backup
-     `echo "start #{@today}" >> /mnt/#{@destination_path}/log`
-     `rsync -rav --log-file=/mnt/#{@destination_path}/rsync-log.txt /mnt/#{@source_path}/it-backup/e/Accounting/ --delete /mnt/#{@destination_path}/#{@day}`
-     check_size = `du -sh /mnt/#{@destination_path}/#{@day}`
-     `echo "stop #{@today}  Total size= #{check_size}" >> /mnt/#{@destination_path}/log`
+     if @day > 1
+        `echo "start #{@today}" >> /mnt/#{@destination_path}/log`
+        `rsync -rav --log-file=/mnt/#{@destination_path}/rsync-log.txt /mnt/#{@source_path}/it-backup/e/Accounting/ --delete /mnt/#{@destination_path}/#{@day}`
+        check_size = `du -sh /mnt/#{@destination_path}/#{@day}`
+        `echo "stop #{Time.now}  Total size= #{check_size}" >> /mnt/#{@destination_path}/log`
+     end
   end
   def monthly_backup
      if @day == 1 
-     puts "rsync -ra /mnt/#{@source_path}  --delete /mnt/monthly/#{@month}"
+       `echo "start #{@today}" >> /mnt/monthly/log`
+       `rsync -ra --log-file=/mnt/monthly/rsync-log.txt /mnt/#{@source_path}/it-backup/e/Accounting/  --delete /mnt/monthly/#{@month}`
+     check_size = `du -sh /mnt/monthly/#{@month}`
+     `echo "stop #{Time.now}  Total size= #{check_size}" >> /mnt/monthly/log`
      end
   end
 end
