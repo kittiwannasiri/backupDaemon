@@ -12,16 +12,16 @@ BK01_daily1 and BK01_daily2. After that the data will record to Adisk, Bdisk and
 
 	Requirement of the script is Ruby V2.0.0 and Cron job in Linux system.
     		
-	1. Figure out how to write the schedule for crontab
-	2. Run backup cron job script 
+		1. Figure out how to write the schedule for crontab
+		2. Run backup cron job script 
 
-	Example: If you wished to have a script named /root/backup.sh run every day at 3am, your crontab entry would look like as follows. First, install your cronjob by running the following command:
+			Example: If you wished to have a script named /root/backup.sh run every day at 3am, your crontab entry would look like as follows. First, install your cronjob by running the following command:
     		
-    							crontab -e
+    				crontab -e
 
-	Append the following entry:
+			Append the following entry:
     		
-    							0 3 * * * /root/backup.rb
+    				0 3 * * * /root/backup.rb
 
 - Who develop this application
 
