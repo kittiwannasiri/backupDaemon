@@ -19,6 +19,7 @@ BK01_daily1 and BK01_daily2. After that the data will record to Adisk, Bdisk and
     		
     				crontab -e
 
+
 			Append the following entry:
     		
     				0 3 * * * /root/backup.rb
