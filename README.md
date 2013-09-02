@@ -14,13 +14,10 @@ BK01_daily1 and BK01_daily2. After that the data will record to Adisk, Bdisk and
     		
 	1. Figure out how to write the schedule for crontab
 	2. Run backup cron job script 
-
        - Example: If you wished to have a script named /root/backup.sh run every day at 3am, your crontab entry would look like as follows. First, install your cronjob by running the following command:
-
                   crontab -e
 
 	- Append the following entry:
-
                   0 3 * * * /root/backup.rb
 
 - Who develop this application
